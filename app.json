@@ -1,13 +1,14 @@
 {
   "expo": {
-    "name": "clasefit",
+    "name": "ClaseFit",
     "slug": "clasefit",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.keppri.clasefit.edeiver"
     },
     "android": {
       "adaptiveIcon": {
@@ -16,10 +17,16 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.keppri.clasefit.edeiver"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c492898f-f386-40a6-b74b-73c98e658336"
+      }
     }
   }
 }

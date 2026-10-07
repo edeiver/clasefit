@@ -1,0 +1,41 @@
+schema: spec-driven
+
+context: |
+  Propósito: ClaseFit, MVP de reservas de clases grupales de un gimnasio.
+  Insumo funcional (fuente de verdad): ./insumo-funcional/insumo_funcional_ClaseFit.md
+  Solo se implementan las funcionalidades definidas allí.
+  Fuera de alcance: login, pagos, instructores, administración, notificaciones, backend.
+
+  Stack: Expo SDK 57 (~57.0.27, plantilla blank-typescript), React Native 0.86.3,
+  React 19.2.3, TypeScript ~6.0.3, Jest ~29.7.0 con jest-expo ~57.0.5.
+  Solo datos locales, sin backend.
+
+  Estructura de carpetas:
+  - src/domain: lógica de negocio pura, sin imports de React.
+  - src/state: estado con useReducer + Context.
+  - src/screens: pantallas.
+  - src/components: componentes de UI reutilizables.
+  - src/data/clases.json: datos de clases.
+  - __tests__/ (en la raíz): tests del dominio.
+
+  Convenciones:
+  - Las reglas de negocio son funciones puras que reciben `now: Date` como parámetro;
+    nunca llamar `new Date()` dentro de src/domain.
+  - Zona horaria: America/Bogota (UTC-05:00, sin horario de verano).
+  - Los mensajes al usuario se copian textualmente del insumo funcional.
+
+  Navegación: sin Expo Router; dos pantallas alternadas con un estado de pestañas simple en App.tsx.
+
+  Idioma: escribir los artefactos de OpenSpec en español, manteniendo en inglés las
+  palabras clave de OpenSpec (SHALL/MUST, WHEN/THEN/AND, Requirement, Scenario).
+
+  Cómo ejecutar: `npx expo start` (app), `npm test` (tests).
+
+rules:
+  proposal:
+    - Indicar siempre qué queda fuera de alcance.
+  specs:
+    - Cada regla de negocio RN-01..RN-04 debe tener su propio Requirement con Scenarios, incluyendo casos límite.
+    - No agregar reglas que no estén en el insumo funcional.
+  tasks:
+    - Tareas pequeñas, cada una verificable.

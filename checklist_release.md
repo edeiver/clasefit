@@ -5,8 +5,9 @@
 - [x] `android.package` e `ios.bundleIdentifier` (`com.keppri.clasefit.edeiver`)
 - [x] `eas.json` con perfiles preview (distribución interna, APK en Android) y production
 - [x] Proyecto vinculado a EAS (`extra.eas.projectId` en `app.json`)
-- [x] Números de build gestionados en remoto por EAS (`appVersionSource: "remote"`) con `autoIncrement` en production
-- [ ] (Bonus) Build instalable · enlace: pendiente
+- [x] Números de build gestionados en remoto por EAS (`appVersionSource: "remote"`) con `autoIncrement` en production; `versionCode` inicializado en 1 en el primer build
+- [x] Keystore de Android generado y guardado por EAS (credenciales remotas)
+- [x] (Bonus) Build instalable (APK, perfil `preview`, EAS Build) · enlace: https://expo.dev/accounts/edeiver/projects/clasefit/builds/c42317a5-8ef0-41be-b538-5266f488a4d7
 
 ## Falta para Google Play
 - [ ] Cuenta de desarrollador de Google Play (pago único)

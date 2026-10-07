@@ -20,6 +20,7 @@
 - [x] 3.4 Implementar la validación de cancelación RN-04 (permitida si `inicio - now >= 2 h`, rechazada si `< 2 h`) con su mensaje textual; verificar con `npx tsc --noEmit`
 - [x] 3.5 Implementar el listado de mis reservas ordenado por inicio de clase, la más próxima primero; verificar con `npx tsc --noEmit`
 - [x] 3.6 Verificar que `src/domain` no importa `react` ni `react-native` (`grep -r "from 'react" src/domain` sin resultados)
+- [x] 3.7 Implementar en src/domain la etiqueta de día según diaOffset (0 → "Hoy", 1 → "Mañana", 2 → "Pasado mañana") según design.md
 
 ## 4. Tests unitarios de reglas de negocio
 
@@ -31,34 +32,35 @@
 - [x] 4.6 `__tests__/rn04.test.ts`: Scenarios "Faltan más de 2 horas", "Faltan exactamente 2 horas", "Faltan un poco menos de 2 horas" y "La clase ya empezó" (Requirement: RN-04); verificar con `npm test`
 - [x] 4.7 `__tests__/validationOrder.test.ts`: Scenarios "RN-02 tiene prioridad sobre RN-01", "RN-01 tiene prioridad sobre RN-03" y "RN-02 tiene prioridad sobre RN-03" (Requirement: Orden de evaluación de reglas al reservar); verificar con `npm test`
 - [x] 4.8 `__tests__/myReservations.test.ts`: Scenario "Reservas ordenadas, la más próxima primero" (Requirement: HU-03); verificar con `npm test`
+- [x] 4.9 __tests__/classDetails.test.ts: Scenario "Datos mostrados por clase" (Requirement: HU-01)
 
 ## 5. Estado (reducer)
 
-- [ ] 5.1 Crear `src/state/bookingReducer.ts` con estado inicial sin reservas y acciones `reservar` y `cancelar` que reciben `claseId` y `now`, delegan la validación al dominio y solo modifican el estado si es exitosa, exponiendo el mensaje resultante; verificar con `npx tsc --noEmit`
-- [ ] 5.2 Escribir `__tests__/bookingReducer.test.ts` cubriendo los Scenarios "Reserva exitosa" y "Reserva rechazada no modifica el estado" (HU-02) y "Cancelación confirmada libera el cupo" (HU-03); verificar con `npm test`
+- [x] 5.1 Crear `src/state/bookingReducer.ts` con estado inicial sin reservas y acciones `reservar` y `cancelar` que reciben `claseId` y `now`, delegan la validación al dominio y solo modifican el estado si es exitosa, exponiendo el mensaje resultante; verificar con `npx tsc --noEmit`
+- [x] 5.2 Escribir `__tests__/bookingReducer.test.ts` cubriendo los Scenarios "Reserva exitosa" y "Reserva rechazada no modifica el estado" (HU-02) y "Cancelación confirmada libera el cupo" (HU-03); verificar con `npm test`
 
 ## 6. Context
 
-- [ ] 6.1 Crear `src/state/BookingContext.tsx` con el proveedor (`useReducer`) y un hook de acceso que lance error si se usa fuera del proveedor; verificar con `npx tsc --noEmit`
-- [ ] 6.2 Envolver la app con el proveedor en `App.tsx`; verificar que la app arranca con `npx expo start` sin errores
+- [x] 6.1 Crear `src/state/BookingContext.tsx` con el proveedor (`useReducer`) y un hook de acceso que lance error si se usa fuera del proveedor; verificar con `npx tsc --noEmit`
+- [x] 6.2 Envolver la app con el proveedor en `App.tsx`; verificar que la app arranca con `npx expo start` sin errores
 
 ## 7. Pantalla de próximas clases
 
-- [ ] 7.1 Crear `src/components/ClassCard.tsx` que muestre nombre, día, hora, instructor y "X de Y cupos", o "Llena" sin acción de reservar cuando no hay cupos; verificar con `npx tsc --noEmit`
-- [ ] 7.2 Crear `src/screens/UpcomingClassesScreen.tsx` que obtenga `now` al renderizar y muestre el listado del dominio; verificar manualmente que C-01 no aparece cuando ya empezó y que C-03 y C-08 muestran "Llena"
+- [x] 7.1 Crear `src/components/ClassCard.tsx` que muestre nombre, día, hora, instructor y "X de Y cupos", o "Llena" sin acción de reservar cuando no hay cupos; verificar con `npx tsc --noEmit`
+- [x] 7.2 Crear `src/screens/UpcomingClassesScreen.tsx` que obtenga `now` al renderizar y muestre el listado del dominio; verificar manualmente que C-01 no aparece cuando ya empezó y que C-03 y C-08 muestran "Llena"
 
 ## 8. Pantalla de mis reservas
 
-- [ ] 8.1 Crear `src/screens/MyReservationsScreen.tsx` con las reservas ordenadas (la más próxima primero) y el mensaje "Aún no tienes reservas" cuando no hay; verificar manualmente con y sin reservas
-- [ ] 8.2 Agregar en `App.tsx` el estado de pestañas simple para alternar entre próximas clases y mis reservas; verificar manualmente el cambio de pestaña
+- [x] 8.1 Crear `src/screens/MyReservationsScreen.tsx` con las reservas ordenadas (la más próxima primero) y el mensaje "Aún no tienes reservas" cuando no hay; verificar manualmente con y sin reservas
+- [x] 8.2 Agregar en `App.tsx` el estado de pestañas simple para alternar entre próximas clases y mis reservas; verificar manualmente el cambio de pestaña
 
 ## 9. Integración de reserva y cancelación en la UI
 
-- [ ] 9.1 Conectar la acción de reservar de `ClassCard` al Context pasando `now` del momento de la acción, y mostrar "¡Listo! Tu cupo está reservado" o el mensaje de error devuelto; verificar manualmente reservando C-07 (cupos bajan de "7 de 12 cupos" a "6 de 12 cupos")
-- [ ] 9.2 Agregar la acción de cancelar en mis reservas con diálogo de confirmación; al confirmar, despachar la cancelación con `now` del momento y mostrar el mensaje de RN-04 si se rechaza; verificar manualmente que sin confirmar la reserva se mantiene
-- [ ] 9.3 Verificar manualmente que una reserva cancelada desaparece de mis reservas y libera el cupo en próximas clases
+- [x] 9.1 Conectar la acción de reservar de `ClassCard` al Context pasando `now` del momento de la acción, y mostrar "¡Listo! Tu cupo está reservado" o el mensaje de error devuelto; verificar manualmente reservando C-07 (cupos bajan de "7 de 12 cupos" a "6 de 12 cupos")
+- [x] 9.2 Agregar la acción de cancelar en mis reservas con diálogo de confirmación; al confirmar, despachar la cancelación con `now` del momento y mostrar el mensaje de RN-04 si se rechaza; verificar manualmente que sin confirmar la reserva se mantiene
+- [x] 9.3 Verificar manualmente que una reserva cancelada desaparece de mis reservas y libera el cupo en próximas clases
 
 ## 10. Verificación manual e integración final
 
-- [ ] 10.1 Verificar manualmente RN-01 (C-10: reservar el último cupo y comprobar "Llena"), RN-02 (reservar dos veces) y RN-03 (tercera reserva del mismo día de clase) con los mensajes textuales
-- [ ] 10.2 Ejecutar `npm test` y `npx tsc --noEmit` sin errores
+- [x] 10.1 Verificar manualmente RN-01 (C-10: reservar el último cupo y comprobar "Llena"), RN-02 (reservar dos veces) y RN-03 (tercera reserva del mismo día de clase) con los mensajes textuales
+- [x] 10.2 Ejecutar `npm test` y `npx tsc --noEmit` sin errores
